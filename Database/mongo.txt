@@ -1,0 +1,94 @@
+See current and default database:
+>db
+test
+
+See all databases:
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+testdb  0.000GB
+
+Use/Switch to a database:
+> use testdb
+switched to db testdb
+
+Drop a database:
+> db.dropDatabase()
+{ "dropped" : "testdb", "ok" : 1 }
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+Create a collection:
+> db.createCollection("test1")
+{ "ok" : 1 }
+> show collections
+test1
+
+Drop a collection:
+> show collections
+test1
+test2
+> db.test2.drop()
+true
+> show collections
+test1
+
+Insert a Document:
+> db.test1.insert({title:"nothing in particular", description: "must be necessary", by: "possiblyme" , nature:"could be better", tags:["fine","loyal","could be a human"], })
+WriteResult({ "nInserted" : 1 })
+
+Fetch all documents:
+> db.test1.find()
+{ "_id" : ObjectId("60228861683eac85a9919f41"), "title" : "nothing in particular", "description" : "must be necessary", "by" : "possiblyme", "nature" : "could be better", "tags" : [ "fine", "loyal", "could be a human" ] }
+> db.test1.find().pretty()
+{
+        "_id" : ObjectId("60228861683eac85a9919f41"),
+        "title" : "nothing in particular",
+        "description" : "must be necessary",
+        "by" : "possiblyme",
+        "nature" : "could be better",
+        "tags" : [
+                "fine",
+                "loyal",
+                "could be a human"
+        ]
+}
+
+Update a document:
+> db.test1.update({'by':'possiblyme'},{$set:{'by':'almostme'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.test1.find()
+{ "_id" : ObjectId("60228861683eac85a9919f41"), "title" : "nothing in particular", "description" : "must be necessary", "by" : "almostme", "nature" : "could be better", "tags" : [ "fine", "loyal", "could be a human" ] }
+
+Remove/Delete Document:
+> db.test1.remove({'by':'possiblyme'})
+WriteResult({ "nRemoved" : 1 })
+> db.test1.find().pretty()
+{
+        "_id" : ObjectId("60228861683eac85a9919f41"),
+        "title" : "nothing in particular",
+        "description" : "must be necessary",
+        "by" : "almostme",
+        "nature" : "could be better",
+        "tags" : [
+                "fine",
+                "loyal",
+                "could be a human"
+        ]
+}
+
+Find by element:
+> db.test1.find({'by':'almostme'})
+{ "_id" : ObjectId("60228861683eac85a9919f41"), "title" : "nothing in particular", "description" : "must be necessary", "by" : "almostme", "nature" : "could be better", "tags" : [ "fine", "loyal", "could be a human" ] }
+
+Add an Index:
+> db.test1.createIndex({'title':1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
