@@ -1,0 +1,11 @@
+select concat('South','Korea');
+select difference('smooth','soothe');
+select lower('LEVI is a Sea Monster');
+select upper('There is no Sea Monster');
+select reverse('everything i wanted');
+select abs(-3.5);
+select ceiling(25.67);
+select floor(25.67);
+select power(3,3);
+use students
+select sum(age)as totalage from studentinfo;

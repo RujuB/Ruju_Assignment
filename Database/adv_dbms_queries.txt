@@ -1,0 +1,42 @@
+create database bighit;
+
+use bighit;
+create table bts(id int, name varchar(50), age int);
+
+insert into bts values(1,'Kim Namjoon',26);
+insert into bts values(2,'Kim Seokjin',28);
+insert into bts values(3,'Min Yoongi',27);
+insert into bts values(4,'Jung Hoseok',26);
+insert into bts values(5,'Park Jimin',25);
+insert into bts values(6,'Kim Taehyung',25);
+insert into bts values(7,'Jeon Jungkook',23);
+
+use bighit;
+create table txt(id int,name varchar(50),age int);
+
+insert into txt values(101,'Yeonjun',22);
+insert into txt values(102,'Soobin',21);
+insert into txt values(103,'Bomgyu',22);
+insert into txt values(104,'Huening Kai',20);
+insert into txt values(105,'Taeyeon',20);
+insert into txt values(106,'free',23);
+
+/*inner join*/
+select txt.name,bts.name from bts inner join txt on bts.age=txt.age;
+/*left join*/
+select txt.name,bts.name from bts left join txt on bts.age=txt.age;
+/*right join*/
+select txt.name,bts.name from bts right join txt on bts.age=txt.age;
+/*full outer join*/
+select txt.name,bts.name from bts full outer join txt on bts.age=txt.age;
+/*self join*/
+select A.name as name1, B.name as name2, A.age from bts A, bts B where A.id<>B.id and A.age=B.age order by A.age; 
+go;
+/*stored procedure*/
+create procedure selectmembers as select * from bts go;
+exec selectmembers;
+go;
+go;
+/*oneparameter procedure*/
+create procedure selectninefiveliners @age int as select * from bts where age=@age go;
+exec selectninefiveliners @age=25;

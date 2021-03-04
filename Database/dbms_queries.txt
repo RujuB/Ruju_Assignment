@@ -1,0 +1,75 @@
+/*create database*/
+create database students;
+
+/*create table*/
+use students;
+create table studentinfo(id int,name varchar(50),age int);
+
+/*insert rows*/
+insert into studentinfo values(101,'abc',30);
+insert into studentinfo values(102,'xyz',27);
+insert into studentinfo values(103,'bts',28);
+insert into studentinfo values(104,'exo',29);
+
+/*select rows*/
+select * from studentinfo;
+/*selected columns*/
+select id,name from studentinfo;
+/*where clause*/]
+select name from studentinfo where id=103;
+/*where clause with like*/
+select id from studentinfo where name like 'b%';
+/*order by*/
+select name from studentinfo order by age;
+/*insert rows*/
+insert into studentinfo values(105,'blackpink',27);
+insert into studentinfo values(106,'red velvet',27);
+
+/*group by*/
+select count(id),age from studentinfo group by age;
+
+/*group by and having*/
+select count(id),age from studentinfo group by age having count(id)>1;
+
+/*alter*/
+alter table studentinfo add city varchar(50);
+
+/*alter and drop column*/
+alter table studentinfo drop column city;
+
+/*drop a table*/
+use students;
+create table student1(id int,name varchar(50),age int);
+
+drop table student1;
+
+/*update a row*/
+update studentinfo set age =26 where id=105;
+/*select*/
+select * from studentinfo;
+
+/*delete a row*/
+delete from studentinfo where id=105;
+
+/*truncate*/
+use students;
+create table student1(id int,name varchar(50),age int);
+
+insert into student1 values(101,'abc',30);
+insert into student1 values(102,'xyz',27);
+insert into student1 values(103,'bts',28);
+
+truncate table student1;
+
+/*grant*/
+grant insert on studentinfo to free;
+
+/*revoke*/
+revoke insert on studentinfo from free;
+
+/*savepoint, rollback, commit*/
+begin transaction
+insert into studentinfo values(107,'blackpink',25);
+save transaction s1;
+rollback transaction s1;
+commit transaction;
