@@ -26,7 +26,7 @@ body{
 }
 button
 {
-	background:rgba(0,0,0,0.6); /* Green */
+	background:rgba(0,0,0,0.6);
   	border: none;
   	color: white;
   	padding: 15px 32px;
